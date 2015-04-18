@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Hackathon_Uninstaller>
+            <version>1.0.0</version>
+        </Hackathon_Uninstaller>
+    </modules>
+    <global>
+        <blocks>
+            <hackathon_uninstaller>
+                <class>Hackathon_Uninstaller_Block</class>
+            </hackathon_uninstaller>
+        </blocks>
+        <helpers>
+            <hackathon_uninstaller>
+                <class>Hackathon_Uninstaller_Helper</class>
+            </hackathon_uninstaller>
+        </helpers>
+        <models>
+            <hackathon_uninstaller>
+                <class>Hackathon_Uninstaller_Model</class>
+            </hackathon_uninstaller>
+        </models>
+        <resources>
+            <hackathon_uninstaller_setup>
+                <setup>
+                    <module>Hackathon_Uninstaller</module>
+                </setup>
+            </hackathon_uninstaller_setup>
+        </resources>
+    </global>
+</config>

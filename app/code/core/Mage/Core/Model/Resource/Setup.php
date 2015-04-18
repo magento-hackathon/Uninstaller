@@ -320,12 +320,17 @@ class Mage_Core_Model_Resource_Setup
                     $this->_upgradeResourceDb($dbVer, $configVer);
                     break;
                 default:
+                    if ($this->_resourceName == 'hackathon_uninstaller_setup') {
+                        $this->_uninstallResourceDb($dbVer);
+                    }
                     return true;
                     break;
              }
         } elseif ($configVer) {
             $this->_installResourceDb($configVer);
         }
+
+
 
         $this->_unhookQueries();
 
@@ -462,6 +467,7 @@ class Mage_Core_Model_Resource_Setup
     protected function _uninstallResourceDb($version)
     {
         $this->_modifyResourceDb(self::TYPE_DB_UNINSTALL, $version, '');
+        $this->_getResource()->deleteResource($this->_resourceName);
         return $this;
     }
 
@@ -505,7 +511,6 @@ class Mage_Core_Model_Resource_Setup
         foreach ($typeFiles as $version => $file) {
             $dbFiles[$version] = $file;
         }
-
         return $this->_getModifySqlFiles($actionType, $fromVersion, $toVersion, $dbFiles);
     }
 
@@ -570,8 +575,10 @@ class Mage_Core_Model_Resource_Setup
         switch ($actionType) {
             case self::TYPE_DB_INSTALL:
             case self::TYPE_DB_UPGRADE:
+            case self::TYPE_DB_UNINSTALL:
                 $this->_getResource()->setDbVersion($this->_resourceName, $version);
                 break;
+
             case self::TYPE_DATA_INSTALL:
             case self::TYPE_DATA_UPGRADE:
                 $this->_getResource()->setDataVersion($this->_resourceName, $version);
@@ -597,6 +604,7 @@ class Mage_Core_Model_Resource_Setup
         switch ($actionType) {
             case self::TYPE_DB_INSTALL:
             case self::TYPE_DB_UPGRADE:
+            case self::TYPE_DB_UNINSTALL:
                 $files = $this->_getAvailableDbFiles($actionType, $fromVersion, $toVersion);
                 break;
             case self::TYPE_DATA_INSTALL:
@@ -612,7 +620,6 @@ class Mage_Core_Model_Resource_Setup
         }
 
         $version = false;
-
         foreach ($files as $file) {
             $fileName = $file['fileName'];
             $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -703,6 +710,12 @@ class Mage_Core_Model_Resource_Setup
                 break;
 
             case self::TYPE_DB_UNINSTALL:
+                foreach ($arrFiles as $version => $file) {
+                    $arrRes[0] = array(
+                        'toVersion' => $version,
+                        'fileName'  => $file
+                    );
+                }
                 break;
         }
         return $arrRes;

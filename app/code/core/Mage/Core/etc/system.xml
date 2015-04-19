@@ -99,6 +99,28 @@
                 </modules_disable_output>
             </groups>
         </advanced>
+        <extension_uninstall translate="label" module="core">
+            <label>Uninstall Extensions</label>
+            <tab>advanced</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <removable_modules translate="label comment">
+                    <label>Removable Modules</label>
+                    <comment><![CDATA[Select the modules to remove and press "Save Config" to delete all files and data. <strong>This process is not reversible once completed! Do not use this tool if you do not understand the ramifications! Please back up your store's files and database prior to continuing.</strong>]]></comment>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>adminhtml/system_config_form_fieldset_modules_removable</frontend_model>
+                    <expanded>1</expanded>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                </removable_modules>
+            </groups>
+        </extension_uninstall>
         <trans_email translate="label" module="core">
             <class>separator-top</class>
             <label>Store Email Addresses</label>

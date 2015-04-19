@@ -195,6 +195,10 @@
                                         <title>Advanced Admin Section</title>
                                         <sort_order>100</sort_order>
                                     </admin>
+                                    <extension_uninstall translate="title">
+                                        <title>Extension Uninstall Section</title>
+                                        <sort_order>150</sort_order>
+                                    </extension_uninstall>
                                 </children>
                             </config>
                             <currency translate="title">
